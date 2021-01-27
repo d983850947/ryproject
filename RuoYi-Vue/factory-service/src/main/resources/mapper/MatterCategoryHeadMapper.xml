@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.baofactory.mapper.MatterCategoryHeadMapper">
+    
+    <resultMap type="MatterCategoryHead" id="MatterCategoryHeadResult">
+        <result property="id"    column="id"    />
+        <result property="matterCode"    column="matter_code"    />
+        <result property="matterName"    column="matter_name"    />
+        <result property="matterSize"    column="matter_size"    />
+        <result property="matterColor"    column="matter_color"    />
+        <result property="matterSpec"    column="matter_spec"    />
+        <result property="matterTypeLevel1"    column="matter_type_level1"    />
+        <result property="matterTypeLevel2"    column="matter_type_level2"    />
+        <result property="dateStatus"    column="date_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectMatterCategoryHeadVo">
+        select id, matter_code, matter_name, matter_size, matter_color, matter_spec, matter_type_level1, matter_type_level2, date_status, create_by, create_time, update_by, update_time from matter_category_head
+    </sql>
+
+    <select id="selectMatterCategoryHeadList" parameterType="MatterCategoryHead" resultMap="MatterCategoryHeadResult">
+        <include refid="selectMatterCategoryHeadVo"/>
+        <where>  
+            <if test="matterCode != null  and matterCode != ''"> and matter_code = #{matterCode}</if>
+            <if test="matterName != null  and matterName != ''"> and matter_name like concat('%', #{matterName}, '%')</if>
+            <if test="matterSize != null  and matterSize != ''"> and matter_size = #{matterSize}</if>
+            <if test="matterColor != null  and matterColor != ''"> and matter_color = #{matterColor}</if>
+            <if test="matterSpec != null  and matterSpec != ''"> and matter_spec = #{matterSpec}</if>
+            <if test="matterTypeLevel1 != null  and matterTypeLevel1 != ''"> and matter_type_level1 = #{matterTypeLevel1}</if>
+            <if test="matterTypeLevel2 != null  and matterTypeLevel2 != ''"> and matter_type_level2 = #{matterTypeLevel2}</if>
+            <if test="dateStatus != null  and dateStatus != ''"> and date_status = #{dateStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectMatterCategoryHeadById" parameterType="Long" resultMap="MatterCategoryHeadResult">
+        <include refid="selectMatterCategoryHeadVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMatterCategoryHead" parameterType="MatterCategoryHead" useGeneratedKeys="true" keyProperty="id">
+        insert into matter_category_head
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="matterCode != null">matter_code,</if>
+            <if test="matterName != null">matter_name,</if>
+            <if test="matterSize != null">matter_size,</if>
+            <if test="matterColor != null">matter_color,</if>
+            <if test="matterSpec != null">matter_spec,</if>
+            <if test="matterTypeLevel1 != null">matter_type_level1,</if>
+            <if test="matterTypeLevel2 != null">matter_type_level2,</if>
+            <if test="dateStatus != null">date_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="matterCode != null">#{matterCode},</if>
+            <if test="matterName != null">#{matterName},</if>
+            <if test="matterSize != null">#{matterSize},</if>
+            <if test="matterColor != null">#{matterColor},</if>
+            <if test="matterSpec != null">#{matterSpec},</if>
+            <if test="matterTypeLevel1 != null">#{matterTypeLevel1},</if>
+            <if test="matterTypeLevel2 != null">#{matterTypeLevel2},</if>
+            <if test="dateStatus != null">#{dateStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMatterCategoryHead" parameterType="MatterCategoryHead">
+        update matter_category_head
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="matterCode != null">matter_code = #{matterCode},</if>
+            <if test="matterName != null">matter_name = #{matterName},</if>
+            <if test="matterSize != null">matter_size = #{matterSize},</if>
+            <if test="matterColor != null">matter_color = #{matterColor},</if>
+            <if test="matterSpec != null">matter_spec = #{matterSpec},</if>
+            <if test="matterTypeLevel1 != null">matter_type_level1 = #{matterTypeLevel1},</if>
+            <if test="matterTypeLevel2 != null">matter_type_level2 = #{matterTypeLevel2},</if>
+            <if test="dateStatus != null">date_status = #{dateStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMatterCategoryHeadById" parameterType="Long">
+        delete from matter_category_head where id = #{id}
+    </delete>
+
+    <delete id="deleteMatterCategoryHeadByIds" parameterType="String">
+        delete from matter_category_head where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

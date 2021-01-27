@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.baofactory.mapper.MatterManagerMapper">
+    
+    <resultMap type="MatterManager" id="MatterManagerResult">
+        <result property="id"    column="id"    />
+        <result property="matterCode"    column="matter_code"    />
+        <result property="matterName"    column="matter_name"    />
+        <result property="matterSize"    column="matter_size"    />
+        <result property="matterColor"    column="matter_color"    />
+        <result property="matterSpec"    column="matter_spec"    />
+        <result property="matterType"    column="matter_type"    />
+        <result property="matterTypeLevel1"    column="matter_type_level1"    />
+        <result property="matterTypeLevel2"    column="matter_type_level2"    />
+        <result property="price"    column="price"    />
+        <result property="designer"    column="designer"    />
+        <result property="fashionEditor"    column="fashion_editor"    />
+        <result property="cuttingTable"    column="cutting_table"    />
+        <result property="dateStatus"    column="date_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectMatterManagerVo">
+        select id, matter_code, matter_name, matter_size, matter_color, matter_spec, matter_type, matter_type_level1, matter_type_level2, price, designer, fashion_editor, cutting_table, date_status, create_by, create_time, update_by, update_time from matter_manager
+    </sql>
+
+    <select id="selectMatterManagerList" parameterType="MatterManager" resultMap="MatterManagerResult">
+        <include refid="selectMatterManagerVo"/>
+        <where>  
+            <if test="matterCode != null  and matterCode != ''"> and matter_code = #{matterCode}</if>
+            <if test="matterName != null  and matterName != ''"> and matter_name like concat('%', #{matterName}, '%')</if>
+            <if test="matterSize != null  and matterSize != ''"> and matter_size = #{matterSize}</if>
+            <if test="matterColor != null  and matterColor != ''"> and matter_color = #{matterColor}</if>
+            <if test="matterSpec != null  and matterSpec != ''"> and matter_spec = #{matterSpec}</if>
+            <if test="matterType != null  and matterType != ''"> and matter_type = #{matterType}</if>
+            <if test="matterTypeLevel1 != null  and matterTypeLevel1 != ''"> and matter_type_level1 = #{matterTypeLevel1}</if>
+            <if test="matterTypeLevel2 != null  and matterTypeLevel2 != ''"> and matter_type_level2 = #{matterTypeLevel2}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="designer != null  and designer != ''"> and designer = #{designer}</if>
+            <if test="fashionEditor != null  and fashionEditor != ''"> and fashion_editor = #{fashionEditor}</if>
+            <if test="cuttingTable != null  and cuttingTable != ''"> and cutting_table = #{cuttingTable}</if>
+            <if test="dateStatus != null  and dateStatus != ''"> and date_status = #{dateStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectMatterManagerById" parameterType="Long" resultMap="MatterManagerResult">
+        <include refid="selectMatterManagerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMatterManager" parameterType="MatterManager" useGeneratedKeys="true" keyProperty="id">
+        insert into matter_manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="matterCode != null">matter_code,</if>
+            <if test="matterName != null">matter_name,</if>
+            <if test="matterSize != null">matter_size,</if>
+            <if test="matterColor != null">matter_color,</if>
+            <if test="matterSpec != null">matter_spec,</if>
+            <if test="matterType != null">matter_type,</if>
+            <if test="matterTypeLevel1 != null">matter_type_level1,</if>
+            <if test="matterTypeLevel2 != null">matter_type_level2,</if>
+            <if test="price != null">price,</if>
+            <if test="designer != null">designer,</if>
+            <if test="fashionEditor != null">fashion_editor,</if>
+            <if test="cuttingTable != null">cutting_table,</if>
+            <if test="dateStatus != null">date_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="matterCode != null">#{matterCode},</if>
+            <if test="matterName != null">#{matterName},</if>
+            <if test="matterSize != null">#{matterSize},</if>
+            <if test="matterColor != null">#{matterColor},</if>
+            <if test="matterSpec != null">#{matterSpec},</if>
+            <if test="matterType != null">#{matterType},</if>
+            <if test="matterTypeLevel1 != null">#{matterTypeLevel1},</if>
+            <if test="matterTypeLevel2 != null">#{matterTypeLevel2},</if>
+            <if test="price != null">#{price},</if>
+            <if test="designer != null">#{designer},</if>
+            <if test="fashionEditor != null">#{fashionEditor},</if>
+            <if test="cuttingTable != null">#{cuttingTable},</if>
+            <if test="dateStatus != null">#{dateStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMatterManager" parameterType="MatterManager">
+        update matter_manager
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="matterCode != null">matter_code = #{matterCode},</if>
+            <if test="matterName != null">matter_name = #{matterName},</if>
+            <if test="matterSize != null">matter_size = #{matterSize},</if>
+            <if test="matterColor != null">matter_color = #{matterColor},</if>
+            <if test="matterSpec != null">matter_spec = #{matterSpec},</if>
+            <if test="matterType != null">matter_type = #{matterType},</if>
+            <if test="matterTypeLevel1 != null">matter_type_level1 = #{matterTypeLevel1},</if>
+            <if test="matterTypeLevel2 != null">matter_type_level2 = #{matterTypeLevel2},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="designer != null">designer = #{designer},</if>
+            <if test="fashionEditor != null">fashion_editor = #{fashionEditor},</if>
+            <if test="cuttingTable != null">cutting_table = #{cuttingTable},</if>
+            <if test="dateStatus != null">date_status = #{dateStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMatterManagerById" parameterType="Long">
+        delete from matter_manager where id = #{id}
+    </delete>
+
+    <delete id="deleteMatterManagerByIds" parameterType="String">
+        delete from matter_manager where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
