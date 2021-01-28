@@ -55,6 +55,8 @@ public class MatterManagerServiceImpl implements IMatterManagerService
     public int insertMatterManager(MatterManager matterManager)
     {
         matterManager.setCreateTime(DateUtils.getNowDate());
+        //todo 生成物料编码
+        //matterManager.setMatterCode("");
         return matterManagerMapper.insertMatterManager(matterManager);
     }
 
